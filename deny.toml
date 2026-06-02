@@ -1,0 +1,8 @@
+# Zeta security audit configuration
+[advisories]
+vulnerability = "deny"
+unmaintained = "deny"
+notice = "deny"
+
+[licenses]
+allow = ["Open BSV License", "MIT", "Apache-2.0"]

@@ -1,0 +1,6 @@
+# Dockerfile.test — Zeta overlay-broadcast test runner
+FROM zetalang/zetac:latest
+WORKDIR /app
+COPY . .
+RUN zetac test --all
+CMD ["zetac", "test", "--all"]

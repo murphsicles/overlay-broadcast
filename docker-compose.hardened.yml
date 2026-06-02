@@ -1,0 +1,67 @@
+# Hardened deployment + CI test compose (REQ-CON-010/011). The `api` service runs
+# hardened (non-root, read-only rootfs, all caps dropped, no-new-privileges); an
+# OfflineNodeClient fixture stands in for a BSV node in CI; a Teranode endpoint is
+# env-driven and commented for live runs. The `test` profile runs the full suite +
+# reproduce + selftest in-container.
+services:
+  # The served HTTP api (overlay-broadcast-server): /health, /readiness, /metrics, and
+  # POST /v1/operation, wired to the BSV node for readiness + submission.
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: overlay-broadcast:hardened
+    entrypoint: ["/app/overlay-broadcast-server"]
+    read_only: true
+    user: "65532:65532"
+    cap_drop: ["ALL"]
+    security_opt:
+      - no-new-privileges:true
+    pids_limit: 256
+    mem_limit: 512m
+    tmpfs:
+      - /tmp:size=16m
+    ports:
+      - "8080:8080"
+    # Secrets injected at runtime only (never baked into the image).
+    environment:
+      - RUST_LOG=info
+      - BIND=0.0.0.0:8080
+      # Point at a BSV node for live readiness + submission (e.g. a Teranode RPC):
+      # - NODE_RPC_URL=${NODE_RPC_URL:-}
+      # - NODE_RPC_USER=${NODE_RPC_USER:-}
+      # - NODE_RPC_PASS=${NODE_RPC_PASS:-}
+      # - OPERATOR_PASSPHRASE_FILE=/run/secrets/operator_passphrase
+    healthcheck:
+      # binary-level liveness (distroless has no curl); /health + /readiness are the
+      # served HTTP probes for an external load balancer.
+      test: ["CMD", "/app/overlay-broadcast", "selftest"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks: [app]
+
+  # OfflineNodeClient fixture for CI: deterministic, no external network.
+  offline-node:
+    image: overlay-broadcast:hardened
+    command: ["reproduce"]
+    read_only: true
+    user: "65532:65532"
+    cap_drop: ["ALL"]
+    security_opt:
+      - no-new-privileges:true
+    networks: [app]
+
+  # Test profile: the full suite + reproduce + selftest in-container
+  # (`docker compose --profile test up --abort-on-container-exit`).
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    image: overlay-broadcast:test
+    profiles: ["test"]
+    networks: [app]
+
+networks:
+  app:
+    driver: bridge
