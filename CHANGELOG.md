@@ -14,19 +14,21 @@ Semantic versioning (REQ-GOV-080). Keep-a-changelog format.
   ECDSA + Shamir reconstruction), `kst`, `obs`, `api`, `res`, `cli`.
 - CLI binary: `overlay-broadcast` with subcommands for overlay, broadcast, session,
   custody, selftest, reproduce, and bench operations.
-- Full docs suite adapted from the Rust original for Zeta (ARCHITECTURE, CODING_STANDARD,
-  COMPLIANCE, DATA_CLASSIFICATION, DEPLOYMENT_VERIFICATION, DISASTER_RECOVERY,
-  INCIDENT_RESPONSE, KEY_LOSS, OPERATIONS, REPRODUCIBILITY, SECURITY, SLOs).
-- RTM.csv requirements-traceability matrix preserved and validated.
+- Full docs suite adapted for Zeta (ARCHITECTURE, CODING_STANDARD, COMPLIANCE,
+  DATA_CLASSIFICATION, DEPLOYMENT_VERIFICATION, DISASTER_RECOVERY, INCIDENT_RESPONSE,
+  KEY_LOSS, OPERATIONS, REPRODUCIBILITY, SECURITY, SLOs, RTM.csv).
 - All dependency crates (sha2, k256, aes-gcm, zeroize, subtle, argon2, num-bigint-dig,
   prometheus, tracing, tiny-http, ureq, clap, etc.) transpiled and published on zorbs.io.
-- Zeta-native build infrastructure: `zorb.toml`, `zetac`-based Dockerfiles, shell-based
-  gate scripts (banned-tokens, RTM validation, build), fuzz target stubs.
+- Zeta-native build infrastructure: `zorb.toml`, `zetac`-based Dockerfiles, CI workflow
+  with gate scripts (banned-tokens, RTM validation, build, test), bundled `zetac` binary
+  for self-hosting bootstrap, fuzz target stubs.
+- Open BSV License v5.
 
 ### Changed
 - Rust CLI entry point reimplemented as a manual argument parser (no clap derive macros,
   which are proc-macros and do not exist in Zeta). All subcommands, flags, and help text
   preserved.
+- All documentation adapted from Rust to Zeta references (toolchain, build commands, etc.).
 
 ## [0.3.0] - 2026-06
 
