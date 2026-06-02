@@ -1,11 +1,200 @@
-// Zeta entry point for overlay-broadcast.
-// Transpiled from Rust and adapted for Zeta's stdlib.
-use cli::{ run, Cli };
+// overlay-broadcast CLI — manual argument parser (no clap dependency)
+// Transpiled from Rust and adapted for Zeta.
+
+use cli::{ run, Cli, Command, OverlayAction, BroadcastAction, SessionAction, CustodyAction };
 
 fn main() {
-    let args = Cli::parse();
-    match run(args) {
+    let args = get_args();
+    let cli = parse_cli(args);
+    match run(cli) {
         Ok(output) => print!("{output}"),
         Err(error) => eprintln!("error: {error}"),
     }
+}
+
+fn get_args() -> Vec<String> {
+    let mut args: Vec<String> = Vec::new();
+    let mut i = 0;
+    loop {
+        let arg = std::env::arg(i);
+        if arg.len() == 0 { break; }
+        args.push(arg);
+        i += 1;
+    }
+    args
+}
+
+fn parse_cli(args: Vec<String>) -> Cli {
+    if args.len() < 2 {
+        print_help();
+        std::process::exit(0);
+    }
+
+    let cmd = args[1];
+    let rest = args[2..];
+
+    if cmd == "overlay" {
+        Cli { command: Command::Overlay { action: parse_overlay(rest) } }
+    } else if cmd == "broadcast" {
+        Cli { command: Command::Broadcast { action: parse_broadcast(rest) } }
+    } else if cmd == "session" {
+        Cli { command: Command::Session { action: parse_session(rest) } }
+    } else if cmd == "custody" {
+        Cli { command: Command::Custody { action: parse_custody(rest) } }
+    } else if cmd == "selftest" {
+        Cli { command: Command::Selftest }
+    } else if cmd == "reproduce" {
+        Cli { command: Command::Reproduce }
+    } else if cmd == "bench" {
+        Cli { command: Command::Bench }
+    } else if cmd == "--help" || cmd == "-h" || cmd == "help" {
+        print_help();
+        std::process::exit(0);
+    } else {
+        eprintln!("error: unknown command '{}'", cmd);
+        std::process::exit(1);
+    }
+}
+
+fn get_flag(rest: Vec<String>, name: String) -> String {
+    let mut i = 0;
+    while i < rest.len() {
+        if rest[i] == name && i + 1 < rest.len() {
+            return rest[i + 1].clone();
+        }
+        i += 1;
+    }
+    String::new()
+}
+
+fn get_flag_bool(rest: Vec<String>, name: String) -> bool {
+    for arg in rest {
+        if arg == name { return true; }
+    }
+    false
+}
+
+fn parse_overlay(rest: Vec<String>) -> OverlayAction {
+    if rest.len() == 0 {
+        eprintln!("error: overlay requires a subcommand (write|signal|resolve|obfuscate|deobfuscate)");
+        std::process::exit(1);
+    }
+    let sub = rest[0];
+    let sub_rest = rest[1..];
+    if sub == "write" {
+        OverlayAction::Write { data: get_flag(sub_rest, "--data".to_string()) }
+    } else if sub == "signal" {
+        OverlayAction::Signal { coords: get_flag(sub_rest, "--coords".to_string()) }
+    } else if sub == "resolve" {
+        OverlayAction::Resolve {
+            coords: get_flag(sub_rest, "--coords".to_string()),
+            seed: get_flag(sub_rest, "--seed".to_string()),
+        }
+    } else if sub == "obfuscate" {
+        OverlayAction::Obfuscate {
+            coords: get_flag(sub_rest, "--coords".to_string()),
+            seed: get_flag(sub_rest, "--seed".to_string()),
+            data: get_flag(sub_rest, "--data".to_string()),
+        }
+    } else if sub == "deobfuscate" {
+        OverlayAction::Deobfuscate {
+            coords: get_flag(sub_rest, "--coords".to_string()),
+            seed: get_flag(sub_rest, "--seed".to_string()),
+            data: get_flag(sub_rest, "--data".to_string()),
+        }
+    } else {
+        eprintln!("error: unknown overlay action '{}'", sub);
+        std::process::exit(1);
+    }
+}
+
+fn parse_broadcast(rest: Vec<String>) -> BroadcastAction {
+    if rest.len() == 0 {
+        eprintln!("error: broadcast requires a subcommand (open|rekey|message|decrypt)");
+        std::process::exit(1);
+    }
+    let sub = rest[0];
+    let sub_rest = rest[1..];
+    if sub == "open" {
+        BroadcastAction::Open { users: get_flag(sub_rest, "--users".to_string()) }
+    } else if sub == "rekey" {
+        BroadcastAction::Rekey { strategy: get_flag(sub_rest, "--strategy".to_string()) }
+    } else if sub == "message" {
+        BroadcastAction::Message { data: get_flag(sub_rest, "--data".to_string()) }
+    } else if sub == "decrypt" {
+        BroadcastAction::Decrypt { data: get_flag(sub_rest, "--data".to_string()) }
+    } else {
+        eprintln!("error: unknown broadcast action '{}'", sub);
+        std::process::exit(1);
+    }
+}
+
+fn parse_session(rest: Vec<String>) -> SessionAction {
+    if rest.len() == 0 {
+        eprintln!("error: session requires a subcommand (subscribe|renew|revoke)");
+        std::process::exit(1);
+    }
+    let sub = rest[0];
+    let sub_rest = rest[1..];
+    if sub == "subscribe" {
+        SessionAction::Subscribe {
+            on_block: get_flag_bool(sub_rest, "--on-block".to_string()),
+            contribution: 0,
+            mem_fee: 0,
+        }
+    } else if sub == "renew" {
+        SessionAction::Renew
+    } else if sub == "revoke" {
+        SessionAction::Revoke
+    } else {
+        eprintln!("error: unknown session action '{}'", sub);
+        std::process::exit(1);
+    }
+}
+
+fn parse_custody(rest: Vec<String>) -> CustodyAction {
+    if rest.len() == 0 {
+        eprintln!("error: custody requires a subcommand (keygen|rotate|revoke|sign)");
+        std::process::exit(1);
+    }
+    let sub = rest[0];
+    let sub_rest = rest[1..];
+    if sub == "keygen" {
+        CustodyAction::Keygen {
+            threshold: 0,
+            shares: 0,
+        }
+    } else if sub == "rotate" {
+        CustodyAction::Rotate
+    } else if sub == "revoke" {
+        CustodyAction::Revoke
+    } else if sub == "sign" {
+        CustodyAction::Sign {
+            threshold: 0,
+            shares: 0,
+            message: get_flag(sub_rest, "--message".to_string()),
+        }
+    } else {
+        eprintln!("error: unknown custody action '{}'", sub);
+        std::process::exit(1);
+    }
+}
+
+fn print_help() {
+    print!("
+overlay-broadcast — Overlay + broadcast service CLI
+
+USAGE:
+    overlay-broadcast <SUBCOMMAND>
+
+SUBCOMMANDS:
+    overlay     Overlay (EP) operations
+    broadcast   Broadcast (GB) operations
+    session     Session lifecycle operations
+    custody     Custody (threshold key) operations
+    selftest    Exercise every layer end to end
+    reproduce   Regenerate and diff deterministic vectors
+    bench       Measure a representative operation's latency
+    help        Print this help message
+");
 }
