@@ -18,7 +18,7 @@ jobs:
       - name: Install system deps
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq libllvm21t64 libssl3 ca-certificates
+          sudo apt-get install -y -qq libllvm21 libssl3 ca-certificates
       - name: Make zetac available
         run: |
           chmod +x bin/zetac
