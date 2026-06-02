@@ -1,12 +1,9 @@
 // Auto-converted from /tmp/overlay-broadcast/crates/cli/src/error.rs
 
-use thiserror::Error;
 /// Errors surfaced by the CLI.
-#[derive(Debug, Error)]
 pub enum CliError {
- BadInput(&str),
- Operation(&str),
- Selftest(usize),
- Reproduce(String),
+    BadInput(String),
+    Operation(String),
+    Selftest(usize),
+    Reproduce(String),
 }
-

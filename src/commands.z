@@ -1,57 +1,59 @@
-// Auto-converted from /tmp/overlay-broadcast/crates/cli/src/commands.rs
+//! CLI command tree (REQ-CLI-001). Every subcommand the spec enumerates is present;
+//! argument parsing is handled by the manual parser in main.z, and each dispatches to a
+//! typed, panic-free handler.
 
-use clap::{ Parser, Subcommand };
 /// The overlay-broadcast command-line interface.
-#[derive(Parser, Debug)]
-#[command(name = "overlay-broadcast", about = "Overlay + broadcast service CLI")]
 pub struct Cli {
- pub command: Command,
+    /// The subcommand to run.
+    pub command: Command,
 }
 
 /// Top-level subcommands.
-#[derive(Subcommand, Debug)]
 pub enum Command {
- Overlay { action: OverlayAction },
- Broadcast { action: BroadcastAction },
- Session { action: SessionAction },
- Custody { action: CustodyAction },
- Selftest,
- Reproduce,
- Bench,
+    /// Overlay (EP) operations.
+    Overlay { action: OverlayAction },
+    /// Broadcast (GB) operations.
+    Broadcast { action: BroadcastAction },
+    /// Session lifecycle operations.
+    Session { action: SessionAction },
+    /// Custody (threshold key) operations.
+    Custody { action: CustodyAction },
+    /// Exercise every layer end to end.
+    Selftest,
+    /// Regenerate and diff deterministic vectors.
+    Reproduce,
+    /// Measure a representative operation's latency.
+    Bench,
 }
 
-/// Overlay actions(REQ-API-001 overlay.*).
-#[derive(Subcommand, Debug)]
+/// Overlay actions (REQ-API-001 overlay.*).
 pub enum OverlayAction {
- Write { data: String },
- Signal { coords: String },
- Resolve { coords: String, seed: String },
- Obfuscate { coords: String, seed: String, data: String },
- Deobfuscate { coords: String, seed: String, data: String },
+    Write { data: String },
+    Signal { coords: String },
+    Resolve { coords: String, seed: String },
+    Obfuscate { coords: String, seed: String, data: String },
+    Deobfuscate { coords: String, seed: String, data: String },
 }
 
-/// Broadcast actions(REQ-API-001 broadcast.*).
-#[derive(Subcommand, Debug)]
+/// Broadcast actions (REQ-API-001 broadcast.*).
 pub enum BroadcastAction {
- Open { users: String },
- Rekey { strategy: String },
- Message { data: String },
- Decrypt { data: String },
+    Open { users: String },
+    Rekey { strategy: String },
+    Message { data: String },
+    Decrypt { data: String },
 }
 
-/// Session actions(REQ-API-001 session.*).
-#[derive(Subcommand, Debug)]
+/// Session actions (REQ-API-001 session.*).
 pub enum SessionAction {
- Subscribe { on_block: bool, contribution: u64, mem_fee: u64 },
- Renew,
- Revoke,
+    Subscribe { on_block: bool, contribution: u64, mem_fee: u64 },
+    Renew,
+    Revoke,
 }
 
-/// Custody actions(REQ-API-001 custody.*).
-#[derive(Subcommand, Debug)]
+/// Custody actions (REQ-API-001 custody.*).
 pub enum CustodyAction {
- Keygen { threshold: usize, shares: usize },
- Rotate,
- Revoke,
+    Keygen { threshold: usize, shares: usize },
+    Rotate,
+    Revoke,
+    Sign { threshold: usize, shares: usize, message: String },
 }
-

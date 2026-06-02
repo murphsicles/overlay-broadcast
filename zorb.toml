@@ -7,16 +7,15 @@ license = "Open BSV License"
 repository = "https://github.com/murphsicles/overlay-broadcast"
 
 [dependencies]
-@overlay/secmem = "0.1"
-@overlay/bsv = "0.1"
-@overlay/ckd = "0.1"
-@overlay/cipher = "0.1"
-@overlay/keygraph = "0.1"
-@overlay/overlay = "0.1"
-@overlay/broadcast = "0.1"
-@overlay/session = "0.1"
-@overlay/custody = "0.1"
-@overlay/kst = "0.1"
-@overlay/obs = "0.1"
-@overlay/api = "0.1"
-@overlay/res = "0.1"
+secmem = { zorb = "@overlay/secmem", version = "0.1" }
+bsv = { zorb = "@overlay/bsv", version = "0.1" }
+ckd = { zorb = "@overlay/ckd", version = "0.1" }
+cipher = { zorb = "@overlay/cipher", version = "0.1" }
+overlay = { zorb = "@overlay/overlay", version = "0.1" }
+broadcast = { zorb = "@overlay/broadcast", version = "0.1" }
+session = { zorb = "@overlay/session", version = "0.1" }
+custody = { zorb = "@overlay/custody", version = "0.1" }
+kst = { zorb = "@overlay/kst", version = "0.1" }
+obs = { zorb = "@overlay/obs", version = "0.1" }
+api = { zorb = "@overlay/api", version = "0.1" }
+res = { zorb = "@overlay/res", version = "0.1" }

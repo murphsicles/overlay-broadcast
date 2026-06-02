@@ -83,7 +83,6 @@ fn join_u32(values: &[u32]) -> String {
 #[cfg(test)]
 mod tests {
  use super::*;
- use clap::Parser;
  #[test]
  fn tst_cli_001_subcommands_parse_and_run() {
  for args in [vec ! ["overlay-broadcast", "selftest"], vec ! ["overlay-broadcast", "reproduce"], vec ! ["overlay-broadcast", "bench"], vec ! ["overlay-broadcast", "overlay", "signal", "--coords", "1,2,3" ,], vec ! ["overlay-broadcast", "broadcast", "open", "--users", "1,2,3,4" ,], vec ! ["overlay-broadcast", "session", "subscribe", "--contribution", "1000", "--mem-fee", "100" ,], vec ! ["overlay-broadcast", "custody", "keygen", "--threshold", "2", "--shares", "3" ,] ,] { assert!(Cli::try_parse_from(args.clone()).is_ok(), "parses {args:?}"); }
