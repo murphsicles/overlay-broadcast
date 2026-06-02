@@ -1,5 +1,11 @@
 # Dockerfile — Zeta overlay-broadcast
-FROM zetalang/zetac:latest AS builder
+# Multi-stage: build zetac from source, then use it to build the app
+FROM rust:bookworm AS zetac-builder
+WORKDIR /zeta
+RUN git clone https://github.com/murphsicles/zeta.git . && cargo build --release 2>&1 | tail -3
+
+FROM rust:bookworm AS builder
+COPY --from=zetac-builder /zeta/target/release/zetac /usr/local/bin/zetac
 WORKDIR /app
 COPY . .
 RUN zetac build --release
