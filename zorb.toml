@@ -7,6 +7,7 @@ license = "Open BSV License"
 repository = "https://github.com/murphsicles/overlay-broadcast"
 
 [dependencies]
+# Overlay workspace crates
 @overlay/secmem = "0.1"
 @overlay/bsv = "0.1"
 @overlay/ckd = "0.1"
@@ -20,3 +21,15 @@ repository = "https://github.com/murphsicles/overlay-broadcast"
 @overlay/obs = "0.1"
 @overlay/api = "0.1"
 @overlay/res = "0.1"
+
+# External dependencies (transpiled Rust crates on zorbs.io)
+@crypto/zeroize = "1.8"
+@crypto/subtle = "2.6"
+@crypto/rand_core = "0.6"
+@crypto/sha2 = "0.10"
+@crypto/ripemd = "0.1"
+@crypto/hmac = "0.12"
+@crypto/hkdf = "0.12"
+@crypto/k256 = "0.13"
+@crypto/aes-gcm = "0.10"
+@math/num-bigint-dig = "0.1"
