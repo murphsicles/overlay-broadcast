@@ -1,0 +1,10 @@
+// Auto-converted from /tmp/overlay-broadcast/crates/cli/src/main.rs
+
+use clap::Parser;
+use cli::{ run, Cli };
+use std::process::ExitCode;
+fn main() -> ExitCode {
+ let cli = Cli::parse();
+ match run(cli) { Ok(output) => { print!("{output}"); ExitCode::SUCCESS } Err(error) => { eprintln!("error: {error}"); ExitCode::FAILURE } }
+}
+

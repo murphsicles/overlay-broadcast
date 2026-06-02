@@ -1,0 +1,88 @@
+# Full CI gate (REQ-GOV-032, REQ-CON-021). Every merge is gated on all of these.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  ZETAC_TERM_COLOR: always
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Zeta toolchain
+        run: |
+          # Install the Zeta toolchain (2026 edition)
+          curl -sSf https://get.zorbs.io | sh -s -- -y
+          echo "$HOME/.zeta/bin" >> $GITHUB_PATH
+      - name: Install gate tooling
+        run: |
+          zetac install cargo-deny --locked || true
+          zetac install cargo-audit --locked || true
+      - name: Format
+        run: zetac fmt --all --check
+      - name: Clippy (deny warnings, max strictness)
+        run: zetac clippy --all-targets --all-features -- -D warnings
+      - name: Build (release, all targets)
+        run: zetac build --release --all-targets
+      - name: Test (unit + integration)
+        run: zetac test --all
+      - name: Project gates (banned tokens, fn-size, RTM, SBOM)
+        run: zetac run -p xtask -- all
+      - name: Supply chain — licenses + advisories + sources (gating)
+        run: zetac deny check
+      - name: Advisories (gating)
+        run: zetac audit
+      - name: SBOM is non-empty and published (REQ-CON-020)
+        run: |
+          test -s docs/sbom.cyclonedx.json
+          grep -q '"bomFormat":"CycloneDX"' docs/sbom.cyclonedx.json
+      - name: Reproduce gate (deterministic vectors, REQ-GOV-050)
+        run: zetac run --release --bin overlay-broadcast -- reproduce
+      - name: Selftest gate (every layer, REQ-GOV-051)
+        run: zetac run --release --bin overlay-broadcast -- selftest
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: docs/sbom.cyclonedx.json
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Zeta toolchain
+        run: |
+          curl -sSf https://get.zorbs.io | sh -s -- -y
+          echo "$HOME/.zeta/bin" >> $GITHUB_PATH
+      - name: Install coverage tooling
+        run: |
+          zetac component add llvm-tools-preview
+          zetac install zetac-llvm-cov --locked
+      # REQ-TST-010: line+branch coverage, gated at documented minimums. The crypto/
+      # protocol packages (secmem, bsv, ckd, cipher, keygraph, overlay, broadcast, session,
+      # custody) carry the higher MC/DC-level bar.
+      - name: Coverage (protocol packages, >= 90%)
+        run: |
+          zetac llvm-cov --branch --fail-under-lines 90 \
+            -p secmem -p bsv -p ckd -p cipher -p keygraph -p overlay -p broadcast -p session -p custody
+      - name: Coverage (workspace, >= 80%)
+        run: zetac llvm-cov --workspace --fail-under-lines 80
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build hardened image
+        run: docker build -t overlay-broadcast:ci .
+      - name: Assert non-root + no shell + read-only start (REQ-CON-001/002)
+        run: |
+          docker run --rm --read-only --cap-drop ALL --security-opt no-new-privileges overlay-broadcast:ci selftest
+          ! docker run --rm overlay-broadcast:ci /bin/sh -c 'echo shell' 2>/dev/null
+      - name: Hardened test compose profile (REQ-CON-011)
+        run: docker compose -f docker-compose.hardened.yml --profile test up --abort-on-container-exit

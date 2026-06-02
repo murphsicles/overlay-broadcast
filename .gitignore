@@ -1,0 +1,24 @@
+# Zeta build output
+/target
+/build
+/dist
+
+# Editor / OS
+.DS_Store
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.iml
+
+# Generated SBOM
+/docs/sbom.cyclonedx.json
+
+# Scratch gate output
+tasks_*.out
+tmp_*.sh
+
+# Environment
+.env
+.env.local

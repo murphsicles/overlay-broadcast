@@ -1,0 +1,57 @@
+// Auto-converted from /tmp/overlay-broadcast/crates/cli/src/commands.rs
+
+use clap::{ Parser, Subcommand };
+/// The overlay-broadcast command-line interface.
+#[derive(Parser, Debug)]
+#[command(name = "overlay-broadcast", about = "Overlay + broadcast service CLI")]
+pub struct Cli {
+ pub command: Command,
+}
+
+/// Top-level subcommands.
+#[derive(Subcommand, Debug)]
+pub enum Command {
+ Overlay { action: OverlayAction },
+ Broadcast { action: BroadcastAction },
+ Session { action: SessionAction },
+ Custody { action: CustodyAction },
+ Selftest,
+ Reproduce,
+ Bench,
+}
+
+/// Overlay actions(REQ-API-001 overlay.*).
+#[derive(Subcommand, Debug)]
+pub enum OverlayAction {
+ Write { data: String },
+ Signal { coords: String },
+ Resolve { coords: String, seed: String },
+ Obfuscate { coords: String, seed: String, data: String },
+ Deobfuscate { coords: String, seed: String, data: String },
+}
+
+/// Broadcast actions(REQ-API-001 broadcast.*).
+#[derive(Subcommand, Debug)]
+pub enum BroadcastAction {
+ Open { users: String },
+ Rekey { strategy: String },
+ Message { data: String },
+ Decrypt { data: String },
+}
+
+/// Session actions(REQ-API-001 session.*).
+#[derive(Subcommand, Debug)]
+pub enum SessionAction {
+ Subscribe { on_block: bool, contribution: u64, mem_fee: u64 },
+ Renew,
+ Revoke,
+}
+
+/// Custody actions(REQ-API-001 custody.*).
+#[derive(Subcommand, Debug)]
+pub enum CustodyAction {
+ Keygen { threshold: usize, shares: usize },
+ Rotate,
+ Revoke,
+}
+
