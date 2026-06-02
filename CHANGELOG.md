@@ -4,22 +4,29 @@ Semantic versioning (REQ-GOV-080). Keep-a-changelog format.
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-06-02
+## [0.3.1] - 2026-06-02
 
 ### Added
-- **Zeta port** of the Rust `overlay-broadcast` v0.3.0 implementation, transpiled via the
-  Dark Factory toolchain. All 20+ packages are now available as `@overlay/*` on zorbs.io.
-- Complete 21-step build (Section 23): `secmem`, `bsv`, `ckd`, `cipher`, `keygraph`,
-  `overlay` (EP 4 046 048 B1), `broadcast` (GB 2623780 B), `session`, `custody`
-  (FROST + hand-rolled GG20 threshold ECDSA + Shamir reconstruction), `kst`, `obs`,
-  `api`, `res`, `cli`, `cmp`, `bench`, plus `proptests`, `conformance`, and `fuzzprop`.
-  Both inventions implemented in full; `zetac test --all` green; clippy/fmt/CI gates clean.
+- **Zeta port** of the Rust `overlay-broadcast` implementation (v0.3.0), transpiled via the
+  Dark Factory toolchain. All workspace crates are available as `@overlay/*` on zorbs.io:
+  `secmem`, `bsv`, `ckd`, `cipher`, `keygraph`, `overlay` (EP 4 046 048 B1),
+  `broadcast` (GB 2623780 B), `session`, `custody` (FROST + hand-rolled GG20 threshold
+  ECDSA + Shamir reconstruction), `kst`, `obs`, `api`, `res`, `cli`.
 - CLI binary: `overlay-broadcast` with subcommands for overlay, broadcast, session,
   custody, selftest, reproduce, and bench operations.
-- Full docs suite adapted from the Rust original (ARCHITECTURE, CODING_STANDARD,
+- Full docs suite adapted from the Rust original for Zeta (ARCHITECTURE, CODING_STANDARD,
   COMPLIANCE, DATA_CLASSIFICATION, DEPLOYMENT_VERIFICATION, DISASTER_RECOVERY,
   INCIDENT_RESPONSE, KEY_LOSS, OPERATIONS, REPRODUCIBILITY, SECURITY, SLOs).
-- RTM.csv requirements-traceability matrix (structural gate enforced by `zetac run -p xtask -- rtm`).
+- RTM.csv requirements-traceability matrix preserved and validated.
+- All dependency crates (sha2, k256, aes-gcm, zeroize, subtle, argon2, num-bigint-dig,
+  prometheus, tracing, tiny-http, ureq, clap, etc.) transpiled and published on zorbs.io.
+- Zeta-native build infrastructure: `zorb.toml`, `zetac`-based Dockerfiles, shell-based
+  gate scripts (banned-tokens, RTM validation, build), fuzz target stubs.
+
+### Changed
+- Rust CLI entry point reimplemented as a manual argument parser (no clap derive macros,
+  which are proc-macros and do not exist in Zeta). All subcommands, flags, and help text
+  preserved.
 
 ## [0.3.0] - 2026-06
 
