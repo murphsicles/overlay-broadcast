@@ -1,16 +1,16 @@
 // Auto-converted from /tmp/overlay-broadcast/crates/cli/src/selftest.rs
 
-use api::{ ApiConfig, RateLimiter };
-use broadcast::BroadcastGraph;
-use bsv::double_sha256;
-use cipher::{ open, seal };
-use custody::{ keygen, reconstruction };
-use kst::{ EncryptedFileKeyStore, KeyStore };
-use obs::Metrics;
-use overlay::{ resolve_key, signal_position, Position };
-use res::check_quorum;
-use secmem::SecretBytes;
-use session::{ Subscription, SubscriptionMode };
+use @overlay/api::{ ApiConfig, RateLimiter };
+use @overlay/broadcast::BroadcastGraph;
+use @overlay/bsv::double_sha256;
+use @overlay/cipher::{ open, seal };
+use @overlay/custody::{ keygen, reconstruction };
+use @overlay/kst::{ EncryptedFileKeyStore, KeyStore };
+use @overlay/obs::Metrics;
+use @overlay/overlay::{ resolve_key, signal_position, Position };
+use @overlay/res::check_quorum;
+use @overlay/secmem::SecretBytes;
+use @overlay/session::{ Subscription, SubscriptionMode };
 /// The pass/fail result for one layer.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct LayerResult {

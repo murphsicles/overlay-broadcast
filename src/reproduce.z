@@ -1,7 +1,7 @@
 // Auto-converted from /tmp/overlay-broadcast/crates/cli/src/reproduce.rs
 
 use crate::error::CliError;
-use bsv::{ bytes_to_hex, double_sha256, hash160, merkle_root, sha256 };
+use @overlay/bsv::{ bytes_to_hex, double_sha256, hash160, merkle_root, sha256 };
 pub type Vector = (String, String);
 
 /// Regenerate every deterministic vector.

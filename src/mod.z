@@ -6,11 +6,11 @@ pub mod reproduce;
 pub mod selftest;
 pub use commands::{ BroadcastAction, Cli, Command, CustodyAction, OverlayAction, SessionAction };
 pub use error::CliError;
-use broadcast::{ BroadcastGraph, Strategy };
-use bsv::{ build_data_carrier, bytes_to_hex, hex_to_bytes };
-use custody::{ keygen, KeyCustodian };
-use overlay::{ deobfuscate, obfuscate, resolve_key, signal_position, Position };
-use session::{ Subscription, SubscriptionMode };
+use @overlay/broadcast::{ BroadcastGraph, Strategy };
+use @overlay/bsv::{ build_data_carrier, bytes_to_hex, hex_to_bytes };
+use @overlay/custody::{ keygen, KeyCustodian };
+use @overlay/overlay::{ deobfuscate, obfuscate, resolve_key, signal_position, Position };
+use @overlay/session::{ Subscription, SubscriptionMode };
 use std::time::Instant;
 /// Execute a parsed CLI command.
 /// 
