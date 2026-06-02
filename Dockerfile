@@ -1,13 +1,11 @@
 # Dockerfile — Zeta overlay-broadcast
-# Multi-stage: build zetac from source, then use it to build the app
-FROM rust:bookworm AS zetac-builder
-WORKDIR /zeta
-RUN git clone https://github.com/murphsicles/zeta.git . && cargo build --release 2>&1 | tail -3
-
-FROM rust:bookworm AS builder
-COPY --from=zetac-builder /zeta/target/release/zetac /usr/local/bin/zetac
+# Uses pre-built zetac binary from bin/
+FROM debian:bookworm-slim AS builder
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates libssl3 && rm -rf /var/lib/apt/lists/*
+COPY bin/zetac /usr/local/bin/zetac
 WORKDIR /app
-COPY . .
+COPY src/ src/
+COPY zorb.toml .
 RUN zetac build --release
 
 FROM debian:bookworm-slim
