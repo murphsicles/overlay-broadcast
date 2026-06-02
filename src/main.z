@@ -1,7 +1,7 @@
 // overlay-broadcast CLI — manual argument parser (no clap dependency)
 // Transpiled from Rust and adapted for Zeta.
 
-use cli::{ run, Cli, Command, OverlayAction, BroadcastAction, SessionAction, CustodyAction };
+use crate::{ run, Cli, Command, OverlayAction, BroadcastAction, SessionAction, CustodyAction };
 
 fn main() {
     let args = get_args();
@@ -76,7 +76,7 @@ fn get_flag_bool(rest: Vec<String>, name: String) -> bool {
 
 fn parse_overlay(rest: Vec<String>) -> OverlayAction {
     if rest.len() == 0 {
-        eprintln!("error: overlay requires a subcommand (write|signal|resolve|obfuscate|deobfuscate)");
+        eprintln!("error: overlay requires a subcommand");
         std::process::exit(1);
     }
     let sub = rest[0];
@@ -110,7 +110,7 @@ fn parse_overlay(rest: Vec<String>) -> OverlayAction {
 
 fn parse_broadcast(rest: Vec<String>) -> BroadcastAction {
     if rest.len() == 0 {
-        eprintln!("error: broadcast requires a subcommand (open|rekey|message|decrypt)");
+        eprintln!("error: broadcast requires a subcommand");
         std::process::exit(1);
     }
     let sub = rest[0];
@@ -131,7 +131,7 @@ fn parse_broadcast(rest: Vec<String>) -> BroadcastAction {
 
 fn parse_session(rest: Vec<String>) -> SessionAction {
     if rest.len() == 0 {
-        eprintln!("error: session requires a subcommand (subscribe|renew|revoke)");
+        eprintln!("error: session requires a subcommand");
         std::process::exit(1);
     }
     let sub = rest[0];
@@ -154,16 +154,13 @@ fn parse_session(rest: Vec<String>) -> SessionAction {
 
 fn parse_custody(rest: Vec<String>) -> CustodyAction {
     if rest.len() == 0 {
-        eprintln!("error: custody requires a subcommand (keygen|rotate|revoke|sign)");
+        eprintln!("error: custody requires a subcommand");
         std::process::exit(1);
     }
     let sub = rest[0];
     let sub_rest = rest[1..];
     if sub == "keygen" {
-        CustodyAction::Keygen {
-            threshold: 0,
-            shares: 0,
-        }
+        CustodyAction::Keygen { threshold: 0, shares: 0 }
     } else if sub == "rotate" {
         CustodyAction::Rotate
     } else if sub == "revoke" {
