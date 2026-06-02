@@ -18,240 +18,70 @@ Electronic Cash System' published by 'Satoshi Nakamoto' in October 2008.
       that contains the longest honest persistent chain of blocks which has been
       produced in a manner which is consistent with the rules set forth in the
       Network Access Rules; and
+  (b) the test blockchains that contain the longest honest persistent chains of
+      blocks which has been produced in a manner which is consistent with the
+      rules set forth in the Network Access Rules.
 
-"BSV Association" means BSV Association, a company limited by guarantee registered
-in Switzerland UID CHE-360.946.895.
+"Network Access Rules" or "Rules" means the set of rules regulating the
+relationship between BSV Association and the nodes on BSV based on the Bitcoin
+Protocol rules and those set out in the Bitcoin White Paper, and available here
+https://bsvblockchain.org/network-access-rules.
 
-"Business Day" means a day (other than a Saturday or Sunday) on which banks are
-open for general business in Zug, Switzerland.
+"Software" means the software the subject of this licence, including any/all
+intellectual property rights therein and associated documentation files.
 
-"Change of Control" means: (a) in relation to a User, any person or group of
-persons acting in concert gaining direct or indirect control of the User; (b) in
-relation to a licensee which is a body corporate, any person or group of persons
-acting in concert beneficially owning more than 50% of the equity share capital
-or voting rights in such body corporate; or (c) the sale of all or substantially
-all of the assets or business of the User.
+BSV Association grants permission, free of charge and on a non-exclusive and
+revocable basis, to any person obtaining a copy of the Software to deal in the
+Software without restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+Software, and to permit persons to whom the Software is furnished to do so,
+subject to and conditioned upon the following conditions:
 
-"Control" means: (a) the beneficial ownership of more than 50% of the issued
-equity share capital or voting rights of the User; or (b) the ability to direct
-the affairs of the User whether by ownership of shares, contract or otherwise.
+1 - The text "© BSV Association," and this license shall be included in all
+copies or substantial portions of the Software.
+2 - The Software, and any software that is derived from the Software or parts
+thereof, must only be used on the BSV Blockchains.
 
-"Data" means data, files, information or other content that is processed by the
-Bitcoin Protocol and resides within the BSV Blockchains, the Bitcoin SV Node
-Software and/or the Bitcoin Network.
+For the avoidance of doubt, this license is granted subject to and conditioned
+upon your compliance with these terms only. In the event of non-compliance, the
+license shall extinguish and you can be enjoined from violating BSV's
+intellectual property rights (incl. damages and similar related claims).
 
-"Documentation" means any documentation (howsoever described) that is made
-available by the Licensor to the User and includes without limitation any
-reference, policy, guidance, website or specification.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES REGARDING ENTITLEMENT,
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS THEREOF BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
 
-"Effective Date" means the date on which the User accepts this license.
 
-"Intellectual Property Rights" means all patents, utility models, trade marks,
-service marks, design rights, database rights, copyright, moral rights, know-how,
-trade secrets and all other intellectual or industrial property rights, in each
-case whether registered or unregistered, and including applications for
-registration of any of the foregoing and all rights or forms of protection of a
-similar nature having equivalent or similar effect to any of the foregoing which
-may subsist anywhere in the world.
+Version 0.1.1 of the Bitcoin SV software, and prior versions of software upon
+which it was based, were licensed under the MIT License, which is included below.
 
-"Licensed Patents" means any patents or patent applications owned or licensed by
-the Licensor that are essential to implementing the Bitcoin Protocol in
-accordance with the Documentation.
+The MIT License (MIT)
 
-"Licensed Software" means any code, library, component, software (including any
-modifications, updates and upgrades) that is made available by the Licensor to
-the User under this license.
+Copyright (c) 2009-2010 Satoshi Nakamoto
+Copyright (c) 2009-2015 Bitcoin Developers
+Copyright (c) 2009-2017 The Bitcoin Core developers
+Copyright (c) 2017 The Bitcoin ABC developers
+Copyright (c) 2018 Bitcoin Association for BSV
+Copyright (c) 2023 BSV Association
+Copyright (c) 2025-2026 Dr. Craig S. Wright & Dr. Roy Murphy
 
-"Mining" means the process of hashing candidates for new Bitcoin blocks as set
-out in the Bitcoin White Paper.
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
 
-"Network" means the network of computers connected to the Bitcoin Network and
-running the Bitcoin Protocol.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-"Network Access Rules" means the rules documented at
-https://bsvblockchain.org/network-access-rules which apply to any user,
-application or service that interacts with the BSV Blockchains, as updated from
-time to time.
-
-"Non-commercial Use" means use for personal, education or academic research
-purposes only. Non-commercial Use specifically excludes: any use by or on behalf
-of any government, government agency or governmental organisation; any use that
-generates or is intended to generate revenue; and any use by or on behalf of any
-entity that is a Competitor.
-
-"Open BSV License" means this license.
-
-"Term" has the meaning given in clause 11.1.
-
-"User" or "Licensee" means a person or entity exercising permissions granted by
-this license.
-
-"Bitcoin Association" means that term as defined in the Network Access Rules.
-
-"Bitcoin SV Node Software" means the Bitcoin SV node reference implementation
-developed by the Bitcoin Association.
-
-"Competitor" means any individual, corporation, partnership, limited liability
-company, governmental authority, association, joint venture, division or other
-business unit, or other entity or organization that is an owner, developer,
-contributor, promoter, advocate, or supporter of any of the following: Bitcoin
-Core (BTC), Bitcoin Cash (BCH), Bitcoin Satoshi's Vision (BSV) – but does not
-apply if the user is a Competitor solely because they support BSV, Bitcoin SV,
-or the Bitcoin Association; Ethereum (ETH), Ethereum Classic (ETC); Litecoin
-(LTC); Dogecoin (DOGE); Ripple (XRP); Cardano (ADA); Monero (XMR); EOS; Stellar
-(XLM); Tron (TRX); Tezos (XTZ); Neo (NEO); IOTA (MIOTA); and/or any fork,
-spin-off, derivative, or evolution of any of the foregoing.
-
-1. GRANT OF LICENSE
-
-1.1 The Licensor grants to the User a worldwide, non-exclusive, non-transferable
-(non-assignable), non-sublicensable, revocable, royalty-free license to:
-
-  (a) use, copy, and reproduce the Licensed Software (in whole or in part);
-  (b) modify, improve, and create derivative works of the Licensed Software; and
-  (c) compile, build, and distribute the Licensed Software and your derivative
-      works thereof (in object code form only);
-
-  solely for Non-commercial Use and subject to the restrictions set forth in
-  this license.
-
-1.2 The Licensor grants to the User a worldwide, non-exclusive,
-non-transferable, non-sublicensable, revocable, royalty-free license under the
-Licensed Patents to make, have made, use, and import the Licensed Software and
-your derivative works thereof, solely for Non-commercial Use and subject to the
-restrictions set forth in this license.
-
-2. RESTRICTIONS
-
-2.1 You may not, without the Licensor's prior written consent, and you must not
-permit any third party to:
-
-  (a) sell, license (including sublicense), lease, distribute, or otherwise
-      commercialize the Licensed Software, any derivative work thereof, or any
-      product or service that incorporates all or any portion of the Licensed
-      Software or the Intellectual Property Rights therein;
-  (b) use the Licensed Software in any manner that violates any applicable law,
-      regulation, or the Network Access Rules;
-  (c) use the Licensed Software in any manner that is competitive with the
-      Bitcoin Association or BSV Blockchains;
-  (d) alter, remove, or obscure any copyright, trademark, patent, or proprietary
-      rights notices contained in the Licensed Software;
-  (e) use the Licensed Software in any manner that infringes the Intellectual
-      Property Rights of any third party;
-  (f) use the Licensed Software or any derivative work thereof in any manner
-      that violates the BSV Association's or the Bitcoin Association's
-      trademarks, branding guidelines, or publications; or
-  (g) use the Licensed Software in any manner that interferes with, disrupts, or
-      harms the BSV Blockchains, the Bitcoin Network, or the Bitcoin Protocol.
-
-2.2 You may not use any of the Licensed Software or any derivative work of the
-Licensed Software to provide any service, product, or functionality to any third
-party, directly or indirectly, including through an API or other interface,
-without the Licensor's prior written consent.
-
-3. RESERVATION OF RIGHTS
-
-3.1 The Licensor retains all Intellectual Property Rights in and to the Licensed
-Software and Licensed Patents not expressly granted herein. No other rights,
-licenses, or immunities are granted by implication, estoppel, or otherwise.
-
-4. ATTRIBUTION
-
-4.1 You must retain and reproduce all copyright and other proprietary notices
-contained in the Licensed Software in any copies or derivative works thereof.
-You must include the following attribution in all copies and derivative works of
-the Licensed Software: "This software includes code licensed under the Open BSV
-License."
-
-5. FEEDBACK
-
-5.1 If you provide the Licensor with any feedback, suggestions, or
-recommendations regarding the Licensed Software ("Feedback"), you hereby grant
-the Licensor a perpetual, irrevocable, worldwide, non-exclusive, royalty-free,
-transferable, sublicensable license to use, reproduce, modify, create derivative
-works from, and otherwise exploit such Feedback for any purpose.
-
-6. INDEMNIFICATION
-
-6.1 You agree to indemnify, defend, and hold harmless the Licensor, its
-affiliates, officers, directors, employees, and agents from and against any and
-all claims, damages, losses, costs, and expenses (including reasonable legal
-fees) arising from or related to: (a) your use of the Licensed Software; (b)
-your derivative works; (c) your violation of this license; (d) your violation of
-any rights of a third party; or (e) your violation of any applicable law or
-regulation.
-
-7. DISCLAIMER OF WARRANTIES
-
-7.1 THE LICENSED SOFTWARE AND LICENSED PATENTS ARE PROVIDED "AS IS" AND "AS
-AVAILABLE," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
-TITLE, NON-INFRINGEMENT, ACCURACY, OR THAT THE LICENSED SOFTWARE WILL MEET YOUR
-REQUIREMENTS OR BE UNINTERRUPTED OR ERROR-FREE. THE LICENSOR DOES NOT WARRANT
-THAT THE LICENSED SOFTWARE IS FREE FROM CLAIMS OF INFRINGEMENT OF THIRD-PARTY
-INTELLECTUAL PROPERTY RIGHTS. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE
-OF THE LICENSED SOFTWARE IS WITH YOU.
-
-8. LIMITATION OF LIABILITY
-
-8.1 TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE
-LICENSOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR
-EXEMPLARY DAMAGES, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS OF PROFITS,
-GOODWILL, USE, DATA, OR OTHER INTANGIBLE LOSSES (EVEN IF THE LICENSOR HAS BEEN
-ADVISED OF THE POSSIBILITY OF SUCH DAMAGES), ARISING OUT OF OR IN CONNECTION
-WITH THIS LICENSE OR THE USE OR INABILITY TO USE THE LICENSED SOFTWARE. THE
-LICENSOR'S TOTAL LIABILITY TO YOU FOR ALL CLAIMS ARISING FROM OR RELATING TO
-THIS LICENSE SHALL NOT EXCEED ONE HUNDRED DOLLARS ($100.00).
-
-9. EXPORT CONTROL
-
-9.1 You agree to comply with all applicable export and re-export control laws
-and regulations, including the Export Administration Regulations of the United
-States and any trade and economic sanctions maintained by the Office of Foreign
-Assets Control (OFAC) of the U.S. Department of the Treasury. You represent and
-warrant that you are not located in, under the control of, or a national or
-resident of any country or region that is subject to U.S. or other applicable
-sanctions.
-
-10. TERMINATION
-
-10.1 This license is effective until terminated. The Licensor may terminate this
-license immediately upon written notice if: (a) you breach any term of this
-license; (b) you become a Competitor; (c) you initiate or participate in any
-legal proceeding challenging the Licensor's Intellectual Property Rights or the
-validity of this license; (d) you use the Licensed Software in a manner that
-the Licensor determines, in its sole discretion, is harmful to the BSV
-Blockchains, the Bitcoin Network, or the Bitcoin Protocol; or (e) you use the
-Licensed Software in a manner that violates the Network Access Rules.
-
-10.2 Upon termination, you must immediately cease all use of the Licensed
-Software and destroy all copies, modifications, and derivative works in your
-possession or control. Within thirty (30) days of termination, you must certify
-in writing to the Licensor that you have complied with these requirements.
-
-11. GOVERNING LAW AND JURISDICTION
-
-11.1 This license and any dispute or claim arising out of or in connection with
-it or its subject matter shall be governed by and construed in accordance with
-the laws of Switzerland, without regard to its conflict of laws principles.
-
-11.2 Any dispute arising out of or in connection with this license shall be
-submitted to the exclusive jurisdiction of the courts of Zug, Switzerland.
-
-12. GENERAL
-
-12.1 The Licensor may update or modify this license at any time. Your continued
-use of the Licensed Software after any such change constitutes your acceptance
-of the new terms. It is your responsibility to review the license periodically.
-
-12.2 If any provision of this license is held to be invalid or unenforceable,
-the remaining provisions shall continue in full force and effect.
-
-12.3 This license constitutes the entire agreement between you and the Licensor
-regarding the Licensed Software and supersedes all prior or contemporaneous
-understandings regarding such subject matter.
-
-12.4 No failure or delay by the Licensor in exercising any right or remedy
-under this license shall operate as a waiver thereof.
-
-12.5 The Licensor reserves all rights not expressly granted herein.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
